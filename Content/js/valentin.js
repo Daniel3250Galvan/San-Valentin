@@ -36,7 +36,7 @@ btnNo.addEventListener("click", () => {
     /* imagen triste */
     contenedorImagenes.innerHTML = "";
     const img = document.createElement("img");
-    img.src = `/Content/img/triste${contadorNo}.jpeg`;
+    img.src ="/Content/img/triste${contadorNo}.jpeg";
     contenedorImagenes.appendChild(img);
 
     /* tamaños */
@@ -118,3 +118,4 @@ function moverBotonNo() {
     btnNo.style.left = x + "px";
     btnNo.style.top = y + "px";
 }
+
