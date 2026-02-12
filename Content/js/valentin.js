@@ -1,123 +1,45 @@
-let contadorNo = 0;
-const maxNo = 5;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const btnNo = document.getElementById("btnNo");
-const btnSi = document.getElementById("btnSi");
-const contenedorImagenes = document.getElementById("imagenesTristes");
-const mensajeFinal = document.getElementById("mensajeFinal");
-const mensajeNo = document.getElementById("mensajeNo");
+    <title>❤️ San Valentín ❤️</title>
 
+    <!-- CSS -->
+    <link href="Content/css/valentin.css" rel="stylesheet" />
+</head>
 
-/* 🔥 MENSAJES DRAMÁTICOS */
-const mensajes = [
-    "¿Segura? 😢",
-    "Me estoy poniendo triste...",
-    "Eso duele mucho 💔",
-    "Mi corazón se está rompiendo...",
-    "¡Última oportunidad! ¡No me abandones! 😭"
-];
+<body>
 
+    <!-- VIDEO DE FONDO -->
+    <video autoplay muted loop id="bgVideo">
+        <source src="Content/video/video.mp4" type="video/mp4">
+    </video>
 
-/* =========================
-   BOTON NO
-========================= */
-btnNo.addEventListener("click", () => {
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenedor">
 
-    if (contadorNo >= maxNo) return;
+        <div id="imagenesTristes" class="imagenes-tristes"></div>
 
-    contadorNo++;
+        <div id="mensajeNo" class="mensaje-no"></div>
 
-    /* mensaje dramático */
-    mensajeNo.textContent = mensajes[contadorNo - 1];
-    mensajeNo.classList.remove("dramatico");
-    void mensajeNo.offsetWidth;
-    mensajeNo.classList.add("dramatico");
+        <h1 class="pregunta">¿Quieres ser mi San Valentín? 💖</h1>
 
-    /* imagen triste */
-    contenedorImagenes.innerHTML = "";
-    const img = document.createElement("img");
+        <div class="botones">
+            <button id="btnSi" class="btn si">SI 💕</button>
+            <button id="btnNo" class="btn no">NO 😢</button>
+        </div>
+    </div>
 
-    // 🔥 CORREGIDO AQUÍ
-    img.src = `Content/img/triste${contadorNo}.jpeg`;
+    <!-- MENSAJE FINAL -->
+    <div id="mensajeFinal" class="mensaje-final oculto">
+        ❤️ Te Amo mucho Mi Vida, Ya sabía que sí querías!! ❤️
+        <img src="Content/img/feliz.jpeg" class="img-feliz" />
+    </div>
 
-    contenedorImagenes.appendChild(img);
+    <!-- JS -->
+    <script src="Content/js/valentin.js"></script>
 
-    /* tamaños */
-    btnNo.style.transform = `scale(${1 - contadorNo * 0.15})`;
-    btnSi.style.transform = `scale(${1 + contadorNo * 0.20})`;
-
-    /* 🔥 MOVER EL BOTON (huir) */
-    moverBotonNo();
-
-    if (contadorNo === maxNo) {
-        setTimeout(() => btnNo.style.display = "none", 300);
-    }
-});
-
-
-
-/* =========================
-   BOTON SI
-========================= */
-btnSi.addEventListener("click", () => {
-
-    const img = contenedorImagenes.querySelector("img");
-    if (img) img.classList.add("temblar");
-
-    setTimeout(() => {
-        mensajeFinal.classList.remove("oculto");
-    }, 500);
-
-    lanzarCorazones();
-    lanzarConfeti();
-});
-
-
-/* =========================
-   CORAZONES
-========================= */
-function lanzarCorazones() {
-    for (let i = 0; i < 40; i++) {
-        const c = document.createElement("div");
-        c.className = "corazon";
-        c.innerHTML = "❤️";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.fontSize = (20 + Math.random() * 30) + "px";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 3000);
-    }
-}
-
-
-/* =========================
-   CONFETI
-========================= */
-function lanzarConfeti() {
-    for (let i = 0; i < 120; i++) {
-        const confeti = document.createElement("div");
-        confeti.className = "confeti";
-        confeti.style.left = Math.random() * 100 + "vw";
-        confeti.style.background = `hsl(${Math.random() * 360}, 90%, 60%)`;
-        document.body.appendChild(confeti);
-        setTimeout(() => confeti.remove(), 3000);
-    }
-}
-
-
-/* =========================
-BOTON NO HUIDIZO
-========================= */
-function moverBotonNo() {
-
-    const margen = 120; // evita salir de pantalla
-
-    const ancho = window.innerWidth - margen;
-    const alto = window.innerHeight - margen;
-
-    const x = Math.random() * ancho;
-    const y = Math.random() * alto;
-
-    btnNo.style.position = "fixed";
-    btnNo.style.left = x + "px";
-    btnNo.style.top = y + "px";
-}
+</body>
+</html>
